@@ -13,6 +13,7 @@ package
 	import flash.display.BitmapData;
 	import flash.ui.MouseCursorData;
 	import flash.ui.Mouse;
+	import flash.display.IBitmapDrawable;
 	
 	[SWF(width="500", height="500", frameRate="30", backgroundColor="#FFFFFF")]
 	public class Startup extends Sprite
@@ -22,24 +23,28 @@ package
 		[Embed(source="Classes/Avatarpic.png")]
 		public const Cursor:Class;
 		
-		public var cursor:DisplayObject;
+		public var cursor;
+		private var cursorBitmapData:BitmapData;
+		private var cursorData:MouseCursorData;
+		private var cursorVector:Vector.<BitmapData>;
 		
 		public function Startup()
 		{
 			// These settings are recommended to avoid problems with touch handling
-			stage.scaleMode = StageScaleMode.NO_SCALE;
-			stage.align = StageAlign.TOP_LEFT;
+			// Create a Starling instance that will run the "Game" class
+			mStarling = new Starling(Game, stage);
+			mStarling.start();
+			
 			createCustomCursor();
 			stage.addEventListener(TouchEvent.TOUCH, touchHandler);
+			
+			stage.scaleMode = StageScaleMode.NO_SCALE;
+			stage.align = StageAlign.TOP_LEFT;
 			
 			/*stage.addEventListener(EnterFrameEvent.ENTER_FRAME, function(event:EnterFrameEvent) {
 				var x:int;
 				trace(x+=event.passedTime);
 			});*/
-			
-			// Create a Starling instance that will run the "Game" class
-			mStarling = new Starling(Game, stage);
-			mStarling.start();
 		}
 		
 		private function touchHandler(event:TouchEvent):void
@@ -49,18 +54,21 @@ package
 			trace("Touched object at position: " + localPos);
 		}
 		
-		public function createCustomCursor():void
+		private function createCustomCursor():void
 		{
-			var cursorBitmaps:Vector.<BitmapData> = new Vector.<BitmapData>();
-			cursorBitmaps.push((new Cursor() as Bitmap).bitmapData);
+			cursor = new Cursor();
+			cursorBitmapData = new BitmapData(32, 32, true, 0x000000);
+			cursorBitmapData.draw(cursor);
 			
-			var mouseCursorData:MouseCursorData = new MouseCursorData();
-			mouseCursorData.data        = cursorBitmaps;
-			mouseCursorData.frameRate   = 30;
-			mouseCursorData.hotSpot     = new Point(0, 0);
+			cursorVector = new Vector.<BitmapData>();
+			cursorVector[0] = cursorBitmapData;
 			
-			Mouse.registerCursor("customCursro", mouseCursorData);
-			Mouse.cursor = "customCursor";
+			cursorData = new MouseCursorData();
+			cursorData.hotSpot = new Point(0, 0);
+			cursorData.data = cursorVector;
+			
+			Mouse.registerCursor("cursor", cursorData);
+			Mouse.cursor = "cursor";
 		}
 	}
 }
