@@ -15,8 +15,8 @@ package Classes
 		
 		public function AvatarEnemy() 
 		{				
-			image.x = 0;
-			image.y = 200;
+			image.x = 250;
+			image.y = 250;
 			
 			addChild(image);			
 		}
