@@ -1,57 +1,52 @@
 package
 {
+//import flash.display.Bitmap;
+//import flash.geom.Point;
+
 import Classes.AvatarEnemy;
 
 import starling.animation.Juggler;
 import starling.core.Starling;
 import starling.display.Sprite;
+import starling.events.EnterFrameEvent;
+/*import starling.events.Touch;
+import starling.events.TouchEvent;
+import starling.events.TouchPhase;*/
 
-import flash.geom.Point;
-import flash.display.Bitmap;
-import flash.display.BitmapData;
-import flash.ui.Mouse;
-import flash.ui.MouseCursorData;
+//import starling.events.EnterFrameEvent;
 
 	public class Game extends Sprite
 	{
-		private var enemy:AvatarEnemy;
-		//private var juggler:Juggler = Starling.juggler;
+		private var juggler:Juggler = Starling.juggler;
 		
-		[Embed(source="Classes/Avatarpic.png")]
-		private const Cursor:Class;
+		private var enemy:AvatarEnemy;
+		
+		public function onEnterFrame(event:EnterFrameEvent):void
+		{
+			trace("Time passed since last frame: " + event.passedTime);
+
+			/*if(enemy.hitTest(new Point(cursor.getX(e), cursor.getY(e)), true)) {
+				var score:int = counter;
+				trace(score);
+			};
+			counter++;*/
+		}
 		
 		public function Game() 
 		{	
 			enemy = new AvatarEnemy();
-			addChild(enemy);
+			this.addChild(enemy);
+			juggler.add(enemy);
 			
-			//var counter:int;
+			/*juggler.delayCall(function(e:TouchEvent):void {
 				
-			/*juggler.delayCall(function():void {
-			
-				if(enemy.hitTest(cursor_D.hotSpot, true)) {
+				if(enemy.hitTest(new Point(cursor.getX(e), cursor.getY(e)), true)) {
 					var score:int = counter;
 					trace(score);
 				};
 				
 				counter++;
-			}, 1.0);*/
-			
-			function createCustomCursor():void
-			{
-				var cursorBitmaps:Vector.<BitmapData> = new Vector.<BitmapData>();
-				cursorBitmaps.push((new Cursor() as Bitmap).bitmapData);
-				
-				var mouseCursorData:MouseCursorData = new MouseCursorData();
-				mouseCursorData.data        = cursorBitmaps;
-				mouseCursorData.frameRate   = 30;
-				mouseCursorData.hotSpot     = new Point(0, 0);
-				
-				Mouse.registerCursor("customCursor", mouseCursorData);
-				Mouse.cursor = "customCursor";
-			}
-			
-			createCustomCursor();
+			}, 30);*/
 		}
 	}
 }

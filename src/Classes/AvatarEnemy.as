@@ -1,11 +1,12 @@
 package Classes
 {
 	
+	import starling.animation.IAnimatable;
 	import starling.display.Image;
 	import starling.display.Sprite;
 	import starling.textures.Texture;
 	
-	public class AvatarEnemy extends Sprite
+	public class AvatarEnemy extends Sprite implements IAnimatable
 	{
 		[Embed(source='Enemypic.png')]
 		private static var Enemypic:Class;
@@ -15,15 +16,13 @@ package Classes
 		private var image:Image = new Image(texture);
 		
 		public function AvatarEnemy() 
-		{
-			var texture:Texture = Texture.fromBitmap(new Enemypic());
-			
-			// display the texture through an Image.
-			
+		{				
 			image.x = 0;
 			image.y = 200;
 			
-			addChild(image);			
+			this.addChild(image);			
 		}
+		
+		public function advanceTime(time:Number):void {/*ADD SOMETHING HERE (NOT SURE WHAT)*/};
 	}
 }
