@@ -11,6 +11,8 @@ package Classes
 	
 	public class AvatarEnemy extends Sprite
 	{
+		
+		//Make image
 		[Embed(source='Enemypic.png')]
 		private static var Enemypic:Class;
 		
@@ -25,15 +27,12 @@ package Classes
 			image.x = 220;
 			image.y = 220;
 			
-			image.addEventListener(TouchEvent.TOUCH, onTouch);
+			image.addEventListener(TouchEvent.TOUCH, onTouch); //On touch of this image, do onTouch
 			
 			addChild(image);			
 		}
 		
-		public function getImage():Image {
-			return image;
-		};
-		
+		//The pausing is implemented by the boolean paused variable - it controls the flow.
 		private function onTouch(e:TouchEvent):void
 		{
 			if (paused) {
