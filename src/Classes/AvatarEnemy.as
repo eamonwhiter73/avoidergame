@@ -1,12 +1,10 @@
 package Classes
-{
-	
-	import starling.animation.IAnimatable;
+{	
 	import starling.display.Image;
 	import starling.display.Sprite;
 	import starling.textures.Texture;
 	
-	public class AvatarEnemy extends Sprite implements IAnimatable
+	public class AvatarEnemy extends Sprite
 	{
 		[Embed(source='Enemypic.png')]
 		private static var Enemypic:Class;
@@ -20,9 +18,7 @@ package Classes
 			image.x = 0;
 			image.y = 200;
 			
-			this.addChild(image);			
+			addChild(image);			
 		}
-		
-		public function advanceTime(time:Number):void {/*ADD SOMETHING HERE (NOT SURE WHAT)*/};
 	}
 }

@@ -1,52 +1,51 @@
 package
 {
-//import flash.display.Bitmap;
-//import flash.geom.Point;
+
+import flash.geom.Point;
 
 import Classes.AvatarEnemy;
+import Classes.NativeCursor;
 
 import starling.animation.Juggler;
 import starling.core.Starling;
 import starling.display.Sprite;
-import starling.events.EnterFrameEvent;
-/*import starling.events.Touch;
 import starling.events.TouchEvent;
-import starling.events.TouchPhase;*/
+
+//import starling.events.TouchPhase;
 
 //import starling.events.EnterFrameEvent;
 
 	public class Game extends Sprite
 	{
-		private var juggler:Juggler = Starling.juggler;
+		//private var juggler:Juggler = Starling.juggler;
 		
 		private var enemy:AvatarEnemy;
 		
-		public function onEnterFrame(event:EnterFrameEvent):void
+		/*public function onEnterFrame(event:EnterFrameEvent):void
 		{
 			trace("Time passed since last frame: " + event.passedTime);
 
-			/*if(enemy.hitTest(new Point(cursor.getX(e), cursor.getY(e)), true)) {
+			if(enemy.hitTest(new Point(cursor.getX(e), cursor.getY(e)), true)) {
 				var score:int = counter;
 				trace(score);
 			};
-			counter++;*/
-		}
+			counter++;
+		}*/
 		
 		public function Game() 
 		{	
 			enemy = new AvatarEnemy();
-			this.addChild(enemy);
-			juggler.add(enemy);
+			addChild(enemy);
 			
-			/*juggler.delayCall(function(e:TouchEvent):void {
-				
+			/*juggler.add(enemy);
+			
+			juggler.delayCall(function(e:TouchEvent):void {
 				if(enemy.hitTest(new Point(cursor.getX(e), cursor.getY(e)), true)) {
-					var score:int = counter;
+					var score:int = juggler.elapsedTime;
 					trace(score);
 				};
-				
-				counter++;
-			}, 30);*/
+				juggler.advanceTime(1);
+			}, 1);*/
 		}
 	}
 }
